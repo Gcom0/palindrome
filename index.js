@@ -7,11 +7,11 @@ String.prototype.reverse = function() {
   return Array.from(this).reverse().join("");
 };
 
-String.prototype.blank = function() {
+/*String.prototype.blank = function() {
   if (this.match(/^\s+$/)) {
     return true;
   }
-};
+};*/
 
 Array.prototype.last = function() {
   return this.slice(-1);
@@ -31,11 +31,17 @@ function Phrase(content) {
   // For example:
   //   new Phrase("Hello, world!").letters() === "Helloworld"
   this.letters = function letters() {
-    return (this.content.match(/[a-z]/gi) || []).join("");
+    const lettersRegEx = /[a-z]/gi;
+    return (this.content.match(lettersRegEx) || []).join("");
   };
 
   // Returns true if the phrase is a palindrome, false otherwise.
   this.palindrome = function palindrome() {
-    return this.processedContent() === this.processedContent().reverse();
+    if (this.processedContent()) {
+      return this.processedContent() === this.processedContent().reverse();
+    }
+    else {
+      return false;
+    }
   };
 }
